@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Top Albums</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .tops-container {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .genre-columns {
+            display: flex;
+            justify-content: space-around;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .genre-column {
+            flex: 1;
+            max-width: 300px;
+            background-color: #ffffff;
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        .genre-column h2 {
+            margin-bottom: 15px;
+            font-size: 1.5em;
+            color: #333;
+        }
+
+        .album-card {
+            margin-bottom: 20px;
+        }
+
+        .album-card img {
+            width: 100%;
+            border-radius: 8px;
+        }
+
+        .album-card p {
+            margin: 5px 0;
+        }
+
+        .album-card strong {
+            font-size: 1.1em;
+        }
+    </style>
+</head>
+<body>
+
+<header class="top-bar">
+    <a th:href="@{/}">
+        <img src="/images/logo.png" alt="Logo" class="logo-img">
+    </a>
+
+    <form action="/albums/search" method="get" class="search-form">
+        <input type="text" name="query" placeholder="Search albums...">
+        <button type="submit">Search</button>
+    </form>
+
+
+
+    <div class="user-section">
+        <a th:href="@{/user}" class="username-link" th:if="${session.loggedInUser != null}" th:text="${session.loggedInUser.username}">username</a>
+        <span th:if="${session.loggedInUser == null}" class="username-link">Guest</span>
+
+        <div class="dropdown">
+            <span class="menu-icon" onclick="toggleMenu()">☰</span>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="/tops">Tops</a>
+                <a href="/login">Login</a>
+                <a href="/logout">Logout</a>
+                <a href="/contact">Contact Page</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<script>
+    function toggleMenu() {
+        const menu = document.getElementById("dropdownMenu");
+        menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
+
+    document.addEventListener('click', function(event) {
+        const isClickInside = document.querySelector('.dropdown').contains(event.target);
+        if (!isClickInside) {
+            document.getElementById("dropdownMenu").style.display = "none";
+        }
+    });
+</script>
+
+<main class="tops-container" style="text-align:center;">
+    <h1>Top 5 Albums by Genre</h1>
+
+    <div class="genre-columns">
+        <div class="genre-column">
+            <h2>Rock</h2>
+            <div th:each="album : ${rockTop}" class="album-card">
+                <img th:src="${album.album.cover}" alt="Cover">
+                <p><strong th:text="${album.album.title}">Title</strong></p>
+                <p th:text="${album.album.artist}">Artist</p>
+                <p>Rating: <span th:text="${album.avgRating}">0</span></p>
+            </div>
+        </div>
+
+        <div class="genre-column">
+            <h2>Hip-Hop</h2>
+            <div th:each="album : ${hiphopTop}" class="album-card">
+                <img th:src="${album.album.cover}" alt="Cover">
+                <p><strong th:text="${album.album.title}">Title</strong></p>
+                <p th:text="${album.album.artist}">Artist</p>
+                <p>Rating: <span th:text="${album.avgRating}">0</span></p>
+            </div>
+        </div>
+
+        <div class="genre-column">
+            <h2>Pop</h2>
+            <div th:each="album : ${popTop}" class="album-card">
+                <img th:src="${album.album.cover}" alt="Cover">
+                <p><strong th:text="${album.album.title}">Title</strong></p>
+                <p th:text="${album.album.artist}">Artist</p>
+                <p>Rating: <span th:text="${album.avgRating}">0</span></p>
+            </div>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>

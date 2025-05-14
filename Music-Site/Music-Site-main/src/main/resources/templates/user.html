@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>User Profile</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .profile-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+        }
+
+        .columns-wrapper {
+            display: flex;
+            gap: 40px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .column {
+            flex: 1;
+            min-width: 300px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+
+        .item-card {
+            background-color: #f5f5f5;
+            border-radius: 8px;
+            padding: 10px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .item-card img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .item-info {
+            flex: 1;
+        }
+
+        .item-info a {
+            font-weight: bold;
+            color: #5a5aee;
+            text-decoration: none;
+        }
+
+        .item-info a:hover {
+            text-decoration: underline;
+        }
+
+        .item-info small {
+            color: #777;
+            font-size: 0.9em;
+        }
+
+        .item-info p {
+            margin: 5px 0;
+        }
+
+        @media (max-width: 800px) {
+            .columns-wrapper {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<header class="top-bar">
+    <a th:href="@{/}">
+        <img src="/images/logo.png" alt="Logo" class="logo-img">
+    </a>
+    <form action="/albums/search" method="get" class="search-form">
+        <input type="text" name="query" placeholder="Search albums...">
+        <button type="submit">Search</button>
+    </form>
+
+    <div class="user-section">
+        <a th:href="@{/user}" class="username-link" th:text="${session.loggedInUser.username}">username</a>
+        <div class="dropdown">
+            <span class="menu-icon" onclick="toggleMenu()">☰</span>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="/tops">Tops</a>
+                <a href="/login">Login</a>
+                <a href="/logout">Logout</a>
+                <a href="/contact">Contact Page</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<script>
+    function toggleMenu() {
+        const menu = document.getElementById("dropdownMenu");
+        menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
+    document.addEventListener('click', function(event) {
+        const isClickInside = document.querySelector('.dropdown').contains(event.target);
+        if (!isClickInside) {
+            document.getElementById("dropdownMenu").style.display = "none";
+        }
+    });
+</script>
+
+<main class="profile-container">
+    <h2 style="text-align:center;">User Profile</h2>
+
+    <div class="columns-wrapper">
+        <!-- Ratings Column -->
+        <div class="column">
+            <h3 class="section-title">Your Ratings</h3>
+            <div th:each="rating : ${ratings}" class="item-card">
+                <img th:src="${rating.album.cover}" alt="Cover">
+                <div class="item-info">
+                    <a th:href="@{'/albums/' + ${rating.album.id_album}}" th:text="${rating.album.title}">Album</a>
+                    <p>Rating: <strong th:text="${rating.rating}">0</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Reviews Column -->
+        <div class="column">
+            <h3 class="section-title">Your Reviews</h3>
+            <div th:each="review : ${reviews}" class="item-card">
+                <img th:src="${review.album.cover}" alt="Cover">
+                <div class="item-info">
+                    <a th:href="@{'/albums/' + ${review.album.id_album}}" th:text="${review.album.title}">Album</a>
+                    <p th:text="${review.content}">Review text</p>
+                    <small th:text="${#temporals.format(review.date, 'yyyy-MM-dd HH:mm')}">Date</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>

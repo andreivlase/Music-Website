@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sign Up</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header class="top-bar">
+    <a th:href="@{/}">
+        <img src="/images/logo.png" alt="Logo" class="logo-img">
+    </a>
+
+    <form action="/albums/search" method="get" class="search-form">
+        <input type="text" name="query" placeholder="Search albums...">
+        <button type="submit">Search</button>
+    </form>
+
+
+
+    <div class="user-section">
+        <a th:href="@{/user}" class="username-link" th:if="${session.loggedInUser != null}" th:text="${session.loggedInUser.username}">username</a>
+        <span th:if="${session.loggedInUser == null}" class="username-link">Guest</span>
+
+        <div class="dropdown">
+            <span class="menu-icon" onclick="toggleMenu()">☰</span>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="/tops">Tops</a>
+                <a href="/login">Login</a>
+                <a href="/logout">Logout</a>
+                <a href="/contact">Contact Page</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<script>
+    function toggleMenu() {
+        const menu = document.getElementById("dropdownMenu");
+        menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
+
+    document.addEventListener('click', function(event) {
+        const isClickInside = document.querySelector('.dropdown').contains(event.target);
+        if (!isClickInside) {
+            document.getElementById("dropdownMenu").style.display = "none";
+        }
+    });
+</script>
+
+<main class="login-container">
+    <h2>Sign Up</h2>
+    <p th:if="${signupError}" th:text="${signupError}" style="color:red;"></p>
+    <form th:action="@{/signup}" method="post" th:object="${user}" class="login-form">
+        <label for="username">Username:</label>
+        <input type="text" id="username" th:field="*{username}" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" th:field="*{email}" required>
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" th:field="*{password}" required>
+
+        <label for="dateOfBirth">Date of Birth:</label>
+        <input type="date" id="dateOfBirth" th:field="*{dateOfBirth}" required>
+
+        <button type="submit">Create Account</button>
+    </form>
+</main>
+
+<div style="text-align: center; margin-top: 10px;">
+    <p>Already have an account? <a th:href="@{/login}">Log in</a></p>
+</div>
+
+</body>
+</html>

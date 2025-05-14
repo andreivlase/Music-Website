@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Search Results</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <style>
+        .album-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .album-card {
+            width: 200px;
+            padding: 10px;
+            background-color: #f7f7f7;
+            border-radius: 8px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            transition: transform 0.2s ease-in-out;
+        }
+        .album-card:hover {
+            transform: scale(1.05);
+        }
+        .album-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .album-card p {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+<header class="top-bar">
+    <a th:href="@{/}"><img src="/images/logo.png" alt="Logo" class="logo-img"></a>
+
+    <form action="/albums/search" method="get" class="search-form">
+        <input type="text" name="query" placeholder="Search albums...">
+        <button type="submit">Search</button>
+    </form>
+
+    <div class="user-section">
+        <a th:href="@{/user}" class="username-link" th:if="${session.loggedInUser != null}" th:text="${session.loggedInUser.username}">username</a>
+        <span th:if="${session.loggedInUser == null}" class="username-link">Guest</span>
+
+        <div class="dropdown">
+            <span class="menu-icon" onclick="toggleMenu()">☰</span>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="/tops">Tops</a>
+                <a href="/login">Login</a>
+                <a href="/logout">Logout</a>
+                <a href="/contact">Contact Page</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<script>
+    function toggleMenu() {
+        const menu = document.getElementById("dropdownMenu");
+        menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
+
+    document.addEventListener('click', function(event) {
+        const isClickInside = document.querySelector('.dropdown').contains(event.target);
+        if (!isClickInside) {
+            document.getElementById("dropdownMenu").style.display = "none";
+        }
+    });
+</script>
+
+<main class="results-box" style="text-align:center;">
+    <h2>Results for "<span th:text="${query}">search</span>":</h2>
+
+    <div class="album-grid" th:if="${results != null}">
+        <div class="album-card" th:each="album : ${results}">
+            <a th:href="@{'/albums/' + ${album.id_album}}">
+                <img th:src="${album.cover}" alt="Cover" />
+                <p><strong th:text="${album.title}">Title</strong></p>
+            </a>
+            <p th:text="${album.artist}" class="album-artist">Artist</p>
+        </div>
+    </div>
+
+    <div th:if="${results.size() == 0}">
+        <p>No results found.</p>
+    </div>
+</main>
+
+</body>
+</html>

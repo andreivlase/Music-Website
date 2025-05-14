@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Top Albums</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+
+<header class="top-bar">
+    <a th:href="@{/}">
+        <img src="/images/logo.png" alt="Logo" class="logo-img">
+    </a>
+
+    <form action="/albums/search" method="get" class="search-form">
+        <input type="text" name="query" placeholder="Search albums...">
+        <button type="submit">Search</button>
+    </form>
+
+
+    <div class="user-section">
+        <div th:if="${session.loggedInUser != null}">
+            <a th:href="@{/user}" th:text="${session.loggedInUser.username}" class="username-link"></a>
+        </div>
+        <div th:if="${session.loggedInUser == null}">
+            <span class="username-link">Guest</span>
+        </div>
+
+        <div class="dropdown">
+            <span class="menu-icon" onclick="toggleMenu()">☰</span>
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="/tops">Tops</a>
+                <a th:if="${session.loggedInUser == null}" href="/login">Login</a>
+                <a th:if="${session.loggedInUser != null}" href="/logout">Logout</a>
+                <a href="/contact">Contact Page</a>
+            </div>
+        </div>
+    </div>
+</header>
+
+<script>
+    function toggleMenu() {
+        const menu = document.getElementById("dropdownMenu");
+        menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
+
+    document.addEventListener('click', function(event) {
+        const isClickInside = document.querySelector('.dropdown').contains(event.target);
+        if (!isClickInside) {
+            document.getElementById("dropdownMenu").style.display = "none";
+        }
+    });
+</script>
+
+<main>
+    <h2 class="section-title">Top 10 Albums of All Time:</h2>
+    <div class="album-grid">
+        <div class="album-card" th:each="albumDTO : ${topAlbums}">
+            <img th:src="${albumDTO.album.cover}" alt="Cover">
+            <p><strong th:text="${albumDTO.album.title}">Album Title</strong></p>
+            <p th:text="${albumDTO.album.artist + ' (' + albumDTO.album.relYear + ')'}">Artist (Year)</p>
+
+            <div class="rating-bar">
+                <div class="rating-fill" th:style="'width:' + (${albumDTO.avgRating} * 10) + '%'"></div>
+            </div>
+            <p>Avg rating: <span th:text="${albumDTO.avgRating}">0.0</span></p>
+        </div>
+    </div>
+
+    <h2 class="section-title">Latest Releases:</h2>
+    <div class="album-grid">
+        <div class="album-card" th:each="albumDTO : ${latestAlbums}">
+            <img th:src="${albumDTO.album.cover}" alt="Cover">
+            <p><strong th:text="${albumDTO.album.title}">Album Title</strong></p>
+            <p th:text="${albumDTO.album.artist + ' (' + albumDTO.album.relYear + ')'}">Artist (Year)</p>
+
+            <div class="rating-bar">
+                <div class="rating-fill" th:style="'width:' + (${albumDTO.avgRating} * 10) + '%'"></div>
+            </div>
+            <p>Avg rating: <span th:text="${albumDTO.avgRating}">0.0</span></p>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>

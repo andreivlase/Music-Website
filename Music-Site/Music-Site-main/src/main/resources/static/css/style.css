@@ -1,0 +1,621 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+.top-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 30px;
+    background-color: #8ACE00;
+    height: 80px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.logo-img {
+    height: 50px;
+    width: auto;
+}
+
+.search-bar {
+    width: 200px;
+    padding: 6px 10px;
+    font-size: 14px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.user-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.menu-icon {
+    font-size: 18px;
+    cursor: pointer;
+}
+
+.section-title {
+    margin: 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.album-grid {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 20px;
+    padding: 20px;
+}
+
+.album-card {
+    text-align: center;
+    padding: 10px;
+    background: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.album-card img {
+    width: 100%;
+    max-width: 100px;
+    height: auto;
+    border-radius: 5px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-menu {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 40px;
+    background-color: white;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    border-radius: 6px;
+    overflow: hidden;
+    z-index: 1000;
+    min-width: 160px;
+}
+
+.dropdown-menu a {
+    display: block;
+    padding: 10px 16px;
+    text-decoration: none;
+    color: #333;
+    font-size: 14px;
+    transition: background-color 0.2s;
+}
+
+.dropdown-menu a:hover {
+    background-color: #f0f0f0;
+}
+
+.contact-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+    font-size: 16px;
+}
+
+.contact-info, .founders {
+    margin-bottom: 40px;
+}
+
+.founders-img {
+    width: 100%;
+    max-width: 600px;
+    display: block;
+    margin: 20px auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.founder-bios {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.bio {
+    flex: 1;
+    background: #f9f9f9;
+    padding: 16px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.logo-img {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
+}
+
+.contact-container {
+    padding: 30px;
+    text-align: center;
+}
+
+.founders-inline .founder-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.founders-img-small {
+    width: 350px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.founder-bios-inline {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    max-width: 400px;
+    text-align: left;
+}
+
+.founders {
+    margin-top: 40px;
+    text-align: center;
+}
+
+.founder-layout {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin-top: 40px;
+    flex-wrap: nowrap;
+}
+
+.bio {
+    width: 320px;
+    background-color: #f9f9f9;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: left;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-size: 15px;
+    line-height: 1.6;
+    flex-shrink: 0;
+}
+
+.founders-img-centered {
+    width: 450px;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.contact-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.album-card {
+    text-align: center;
+    padding: 10px;
+    background: #f4f4f4;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 260px;
+}
+
+.album-card img {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    margin: 0 auto;
+    border-radius: 5px;
+}
+
+.album-card p {
+    margin: 4px 0;
+    font-size: 14px;
+}
+
+.rating-bar {
+    width: 80%;
+    height: 8px;
+    background-color: #ddd;
+    border-radius: 5px;
+    overflow: hidden;
+    margin: 4px auto;
+}
+
+.rating-fill {
+    height: 100%;
+    background-color: #4CAF50;
+    width: 0%;
+    transition: width 0.5s ease-in-out;
+}
+
+.login-container {
+    max-width: 400px;
+    margin: 80px auto;
+    padding: 30px;
+    background: #f9f9f9;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    text-align: center;
+}
+
+.login-container h2 {
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.login-form label {
+    text-align: left;
+    font-weight: bold;
+    font-size: 14px;
+    color: #444;
+}
+
+.login-form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    width: 100%;
+}
+
+.login-form button {
+    padding: 10px;
+    background-color: #8ACE00;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.login-form button:hover {
+    background-color: #76b300;
+}
+
+html {
+    margin: 0;
+    padding: 0;
+}
+
+.username-link {
+    font-weight: bold;
+    font-size: 14px;
+    color: #000;
+    text-decoration: none;
+    margin-left: 8px;
+}
+
+.username-link:hover {
+    text-decoration: underline;
+}
+
+.search-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    gap: 8px;
+}
+
+.search-form input[type="text"] {
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    width: 200px;
+}
+
+.search-form button {
+    padding: 6px 12px;
+    background-color: #76c800;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.search-form button:hover {
+    background-color: #64a900;
+}
+
+.album-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.album-card {
+    background-color: white;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    width: 180px;
+    text-align: center;
+}
+
+.album-card img.album-cover {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.results-box {
+    background-color: #f8f8f8;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 12px;
+    width: fit-content;
+    box-shadow: 0 0 12px rgba(0,0,0,0.05);
+}
+
+.results-box {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.album-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-top: 30px;
+}
+
+.album-card {
+    background-color: #f7f7f7;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    width: 180px;
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+.album-card:hover {
+    transform: translateY(-5px);
+}
+
+.album-card img.album-cover {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 12px;
+}
+
+.album-container {
+    text-align: center;
+    padding: 20px;
+}
+
+.album-cover-large {
+    width: 250px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #ccc;
+}
+
+.album-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.album-info {
+    font-size: 1rem;
+    color: gray;
+}
+
+.review-section {
+    margin-top: 30px;
+}
+
+.review-card {
+    border: 1px solid #eee;
+    padding: 10px;
+    margin: 10px auto;
+    width: 300px;
+    background: #f8f8f8;
+    border-radius: 5px;
+}
+
+.review-form {
+    margin-top: 30px;
+}
+
+.album-container {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.album-cover-large {
+    width: 300px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+}
+
+.album-title {
+    font-size: 32px;
+    margin-top: 20px;
+}
+
+.album-info {
+    font-style: italic;
+    color: #777;
+}
+
+.album-rating {
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.review-section {
+    margin-top: 30px;
+}
+
+.review-card {
+    background: #f3f3f3;
+    border-radius: 6px;
+    padding: 15px;
+    margin-bottom: 10px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.review-form textarea {
+    width: 100%;
+    height: 80px;
+    margin-bottom: 10px;
+}
+
+.review-form input[type="number"] {
+    width: 60px;
+}
+
+.review-form button {
+    margin-left: 10px;
+}
+
+.album-container {
+    max-width: 700px;
+    margin: 40px auto;
+    text-align: center;
+}
+
+.album-cover-large {
+    width: 250px;
+    height: auto;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.album-title {
+    font-size: 28px;
+    margin: 10px 0;
+}
+
+.album-info {
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.album-rating {
+    font-size: 16px;
+    margin-bottom: 30px;
+}
+
+.review-section {
+    margin-top: 30px;
+    text-align: left;
+}
+
+.review-card {
+    background-color: #f7f7f7;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.05);
+}
+
+.review-card p {
+    margin: 0;
+    font-size: 15px;
+}
+
+.review-card small {
+    color: #555;
+    display: block;
+    margin-top: 8px;
+}
+
+.review-form {
+    margin-top: 30px;
+    text-align: left;
+}
+
+.review-form textarea {
+    width: 100%;
+    min-height: 100px;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    resize: vertical;
+    font-family: Arial, sans-serif;
+}
+
+.review-form input[type="number"] {
+    width: 60px;
+    padding: 5px;
+    margin-top: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.review-form button {
+    margin-top: 10px;
+    padding: 8px 14px;
+    background-color: #2a9d8f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.review-form button:hover {
+    background-color: #21867a;
+}
+
+.genre-columns {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    padding: 20px;
+    max-width: 1200px;
+}
+
+.genre-column {
+    flex: 1 1 300px;
+    max-width: 300px;
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
